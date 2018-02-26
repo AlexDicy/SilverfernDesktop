@@ -1,5 +1,9 @@
+# IntelliJ files
+.idea/
+
+# compiled files
 out/
 *.jar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# virtual machine crash
 hs_err_pid*
