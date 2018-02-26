@@ -1,0 +1,9 @@
+.root {
+    -fx-background-color: #263238;
+}
+
+.window-buttons {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 0;
+    -fx-border-style: none;
+}
