@@ -7,6 +7,7 @@ public class Controller {
 
     @FXML
     private void closeApp() {
+        Main.timer.cancel();
         Platform.exit();
     }
 }
