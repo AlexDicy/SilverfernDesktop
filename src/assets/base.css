@@ -3,7 +3,11 @@
 }
 
 .window-buttons {
-    -fx-background-color: #ffffff;
+    -fx-background-color: transparent;
     -fx-border-radius: 0;
     -fx-border-style: none;
+}
+
+.close-button {
+    color: #00ff00;
 }
