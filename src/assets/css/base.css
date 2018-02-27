@@ -1,5 +1,11 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/assets/fonts/Roboto-Regular.ttf");
+}
+
 .root {
     -fx-background-color: transparent;
+    -fx-font-family: "Roboto", sans-serif;
 }
 
 .panel {
@@ -7,7 +13,7 @@
 }
 
 .window-buttons {
-    -fx-font-family: Arial;
+    /*-fx-font-family: Arial;*/
     -fx-font-size: 30;
     -fx-background-color: transparent;
     -fx-background-radius: 0;

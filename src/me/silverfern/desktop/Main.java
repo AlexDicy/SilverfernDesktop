@@ -1,6 +1,7 @@
 package me.silverfern.desktop;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,7 +9,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 public class Main extends Application {
 
@@ -24,7 +29,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        //primaryStage.setAlwaysOnTop(true);
         primaryStage.show();
 
         // allow window move
@@ -40,15 +44,15 @@ public class Main extends Application {
 
         // Temporary "realtime" scene reload
         timer = new Timer();
-        /*timer.schedule(new TimerTask() {
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 FutureTask<Void> updateUITask = new FutureTask<>(() -> {
                     try {
                         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
                         root.getStylesheets().clear();
-                        root.getStylesheets().add("/assets/base.css");
-                        primaryStage.setScene(new Scene(root, 480, 270, Color.TRANSPARENT));
+                        root.getStylesheets().add("/assets/css/base.css");
+                        primaryStage.setScene(new Scene(root, Color.TRANSPARENT));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -60,7 +64,7 @@ public class Main extends Application {
                     e.printStackTrace();
                 }
             }
-        }, 200, 200);*/
+        }, 200, 200);
     }
 
 
