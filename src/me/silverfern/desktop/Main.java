@@ -5,68 +5,84 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.util.prefs.Preferences;
 
 public class Main extends Application {
+    private static Main instance;
 
-    static Timer timer;
     private double xOff = 0;
     private double yOff = 0;
 
+    private Stage stage;
+    private Scene scene;
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-        primaryStage.setTitle("Silverfern");
+    public void start(Stage stage) throws Exception {
+        // Fix the AntiAliasing for the font
+        System.setProperty("prism.lcdtext", "false");
+        // Load fonts
+        Font.loadFont(getClass().getResource("/assets/fonts/Roboto-Light.ttf").toExternalForm(), 12);
+        Font.loadFont(getClass().getResource("/assets/fonts/Roboto-Regular.ttf").toExternalForm(), 12);
+        Font.loadFont(getClass().getResource("/assets/fonts/Roboto-Medium.ttf").toExternalForm(), 12);
+        // Load the main scene
+        Parent root = FXMLLoader.load(getClass().getResource("/assets/fxml/main.fxml"));
+        stage.setTitle("Silverfern");
         Scene scene = new Scene(root, Color.TRANSPARENT);
-        primaryStage.setScene(scene);
-        primaryStage.sizeToScene();
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.show();
+        instance = this;
+        this.stage = stage;
+        this.scene = scene;
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
 
         // allow window move
         scene.setOnMousePressed(event -> {
-            xOff = event.getScreenX() - primaryStage.getX();
-            yOff = event.getScreenY() - primaryStage.getY();
+            xOff = event.getScreenX() - stage.getX();
+            yOff = event.getScreenY() - stage.getY();
         });
         scene.setOnMouseDragged(event -> {
-            primaryStage.setX(event.getScreenX() - xOff);
-            primaryStage.setY(event.getScreenY() - yOff);
+            stage.setX(event.getScreenX() - xOff);
+            stage.setY(event.getScreenY() - yOff);
         });
 
-
-        // Temporary "realtime" scene reload
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                FutureTask<Void> updateUITask = new FutureTask<>(() -> {
-                    try {
-                        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-                        root.getStylesheets().clear();
-                        root.getStylesheets().add("/assets/css/base.css");
-                        primaryStage.setScene(new Scene(root, Color.TRANSPARENT));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }, null);
-                Platform.runLater(updateUITask);
-                try {
-                    updateUITask.get();
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
+        new Thread(() -> {
+            String mcToken = Preferences.userRoot().get("user_mc_token", null);
+            //Preferences.userRoot().put("user_mc_token", "IT'S WORKING");
+            if (mcToken == null) {
+                Platform.runLater(() -> loadPanel("login", "Login"));
             }
-        }, 200, 200);
+        }).start();
     }
 
+    public void loadPanel(String name) {
+        try {
+            Pane pane = (Pane) scene.lookup("#panels");
+            Parent content = FXMLLoader.load(getClass().getResource("/assets/fxml/" + name + ".fxml"));
+            pane.getChildren().clear();
+            pane.getChildren().add(content);
+            stage.sizeToScene();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadPanel(String name, String title) {
+        ((Label) scene.lookup("#title-big")).setText(title);
+        loadPanel(name);
+    }
+
+    public static Main getInstance() {
+        return instance;
+    }
 
     public static void main(String[] args) {
         launch(args);

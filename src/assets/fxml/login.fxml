@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="480.0" styleClass="panel" fx:controller="me.silverfern.desktop.controllers.Login" xmlns:fx="http://javafx.com/fxml/1">
+    <TextField fx:id="username" layoutX="91.0" layoutY="150.0" promptText="Minecraft username" />
+    <PasswordField fx:id="password" layoutX="91.0" layoutY="184.0" onAction="#login" promptText="Password" />
+</AnchorPane>
