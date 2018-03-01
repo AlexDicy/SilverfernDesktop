@@ -3,28 +3,40 @@
     -fx-font-family: "Roboto", sans-serif;
 }
 
-.panel {
+#bar {
     -fx-background-color: #263238;
 }
 
+.panel {
+    -fx-background-color: #37474F;
+}
+
 .window-buttons {
-    -fx-font-size: 30;
     -fx-background-color: transparent;
     -fx-background-radius: 0;
-    -fx-pref-height: 20;
-    -fx-pref-width: 40;
-    -fx-padding: -200; /* hack: used to resize the button */
+    -fx-background-size: 20px;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
 }
 
 .close-button {
-    -fx-text-fill: #455A64;
+    -fx-background-image: url("/assets/images/icons/close.png");
 }
 
+.maximize-button {
+    -fx-background-image: url("/assets/images/icons/maximize.png");
+}
+
+
+.text-error {
+    -fx-text-fill: #9b3b27;
+}
 
 .title-small {
     -fx-font-size: 17px;
     -fx-text-fill: #4d646e;
 }
+
 .title-big {
     -fx-font-size: 30;
 }
@@ -33,4 +45,32 @@
     -fx-background-color: #222a2e;
     -fx-background-radius: 4px;
     -fx-padding: 0 5px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.shadow-0 {
+    box-shadow: none;
+}
+
+.shadow-1 {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, .12), 10, 2, 2, 2);
+}
+
+.shadow-2 {
+    //box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.shadow-3 {
+    //box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.shadow-4 {
+    //box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.shadow-5 {
+    //box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }

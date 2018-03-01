@@ -48,8 +48,9 @@ public class API {
     }
 
     public static JsonElement sendPost(String url, JsonElement data) {
+        HttpURLConnection conn = null;
         try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setDoOutput(true);
             conn.setDoInput(true);
             conn.setInstanceFollowRedirects(false);
@@ -65,7 +66,18 @@ public class API {
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             return new JsonParser().parse(reader);
         } catch (IOException e) {
-            e.printStackTrace();
+            // Get error stream as JSON if it's not a server error
+            try {
+                if (conn != null) {
+                    int code = conn.getResponseCode();
+                    if (code > 400 && code < 500) {
+                        return new JsonParser().parse(new BufferedReader(new InputStreamReader(conn.getErrorStream())));
+                    }
+                    e.printStackTrace();
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
         return null;
     }

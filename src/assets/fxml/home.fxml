@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import java.lang.String?>
+<FlowPane fx:id="box" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/8.0.121"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.silverfern.desktop.controllers.Home"
+          styleClass="panel" minWidth="800" minHeight="500">
+    <BorderPane id="bar" prefHeight="30.0" prefWidth="${box.width}">
+        <left>
+            <Label translateX="19.0" translateY="4.0" styleClass="title-small" text="Silverfern Desktop - Home"/>
+        </left>
+        <right>
+            <AnchorPane translateY="4.0" translateX="-6.0">
+                <Button onAction="#maximizeApp" translateX="-30.0" textAlignment="CENTER">
+                    <styleClass>
+                        <String fx:value="window-buttons"/>
+                        <String fx:value="maximize-button"/>
+                    </styleClass>
+                </Button>
+                <Button onAction="#closeApp" textAlignment="CENTER">
+                    <styleClass>
+                        <String fx:value="window-buttons"/>
+                        <String fx:value="close-button"/>
+                    </styleClass>
+                </Button>
+            </AnchorPane>
+        </right>
+    </BorderPane>
+    <Label text="TEEEST" styleClass="title-big"/>
+</FlowPane>

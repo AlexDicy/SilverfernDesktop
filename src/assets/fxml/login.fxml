@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="480.0" styleClass="panel" fx:controller="me.silverfern.desktop.controllers.Login" xmlns:fx="http://javafx.com/fxml/1">
-    <TextField fx:id="username" layoutX="91.0" layoutY="150.0" promptText="Minecraft username" />
-    <PasswordField fx:id="password" layoutX="91.0" layoutY="184.0" onAction="#login" promptText="Password" />
+<AnchorPane prefHeight="300.0" prefWidth="480.0" styleClass="panel" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.silverfern.desktop.controllers.Login">
+    <TextField fx:id="email" layoutX="91.0" layoutY="150.0" promptText="Minecraft email"/>
+    <PasswordField fx:id="password" layoutX="91.0" layoutY="184.0" onAction="#login" promptText="Password"/>
+    <Label layoutX="19.0" layoutY="12.0" id="message" text="Error">
+        <styleClass>
+            <String fx:value="hidden"/>
+            <String fx:value="text-error"/>
+        </styleClass>
+    </Label>
 </AnchorPane>
