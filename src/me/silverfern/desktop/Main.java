@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.prefs.Preferences;
 
@@ -40,7 +42,7 @@ public class Main extends Application {
         Font.loadFont(getClass().getResource("/assets/fonts/Roboto-Regular.ttf").toExternalForm(), 14);
         Font.loadFont(getClass().getResource("/assets/fonts/Roboto-Medium.ttf").toExternalForm(), 14);
         // Load the main scene
-        Parent root = FXMLLoader.load(getClass().getResource("/assets/fxml/main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/assets/fxml/main.fxml"), ResourceBundle.getBundle("assets.locales.Messages", Locale.ENGLISH));
         stage.setTitle("Silverfern");
         Scene scene = new Scene(root, Color.TRANSPARENT);
 
@@ -69,7 +71,7 @@ public class Main extends Application {
     public Scene loadPanel(String name) {
         try {
             Pane pane = (Pane) scene.lookup("#panels");
-            Parent content = FXMLLoader.load(getClass().getResource("/assets/fxml/" + name + ".fxml"));
+            Parent content = FXMLLoader.load(getClass().getResource("/assets/fxml/" + name + ".fxml"), ResourceBundle.getBundle("assets.locales.Messages", Locale.ENGLISH));
             pane.getChildren().clear();
             pane.getChildren().add(content);
             stage.sizeToScene();
@@ -86,9 +88,9 @@ public class Main extends Application {
 
     public Scene loadHome() {
         try {
-            scene.setRoot(FXMLLoader.load(getClass().getResource("/assets/fxml/home.fxml")));
-            barMove();
+            scene.setRoot(FXMLLoader.load(getClass().getResource("/assets/fxml/home.fxml"), ResourceBundle.getBundle("assets.locales.Messages", Locale.ENGLISH)));
             stage.sizeToScene();
+            barMove();
 
             stage.maximizedProperty().addListener((obj, oldValue, maximixed) -> pref.putBoolean("window_maximized", maximixed));
             stage.xProperty().addListener((observable, oldValue, x) -> pref.putDouble("window_x", x.doubleValue()));
@@ -104,8 +106,7 @@ public class Main extends Application {
                 boolean out = true;
                 for (Screen screen : Screen.getScreens()) {
                     Rectangle2D bounds = screen.getVisualBounds();
-                    if (bounds.getMinX() < x && x + 200 < bounds.getMaxX() &&
-                            bounds.getMinY() < y && y + 200 < bounds.getMaxY()) {
+                    if (bounds.getMinX() < x && x + 200 < bounds.getMaxX() && bounds.getMinY() < y && y + 200 < bounds.getMaxY()) {
                         out = false;
                         break;
                     }
@@ -141,6 +142,7 @@ public class Main extends Application {
                 toggleMax();
             }
         });
+        ResizeHelper.addResizeListener(stage);
     }
 
     public void toggleMax() {

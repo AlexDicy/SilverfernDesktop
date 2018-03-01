@@ -3,6 +3,7 @@ package me.silverfern.desktop.controllers;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -10,18 +11,27 @@ import javafx.scene.control.TextField;
 import me.silverfern.desktop.Main;
 import me.silverfern.desktop.api.API;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Created by HAlexTM on 28/02/2018.
  */
-public class Login {
+public class Login implements Initializable {
     @FXML
     private TextField email;
     @FXML
     private PasswordField password;
 
+    private ResourceBundle bundle;
+
+    public void initialize(URL location, ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
     @FXML
     private void login() {
-        Main.getInstance().loadPanel("loading", "Loggin in");
+        Main.getInstance().loadPanel("loading", bundle.getString("login.loading"));
         JsonObject json = new JsonObject();
         JsonObject agent = new JsonObject();
 
