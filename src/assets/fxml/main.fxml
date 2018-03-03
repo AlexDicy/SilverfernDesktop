@@ -5,18 +5,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import java.lang.String?>
-<AnchorPane stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.silverfern.desktop.controllers.Controller">
+<AnchorPane stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="me.silverfern.desktop.controllers.Controller">
     <AnchorPane id="bar" prefHeight="80.0" prefWidth="480.0" styleClass="panel">
-        <Button layoutX="440" mnemonicParsing="false" onAction="#closeApp" textAlignment="CENTER">
+        <Button layoutX="450" mnemonicParsing="false" onAction="#closeApp" textAlignment="CENTER">
             <styleClass>
-                <String fx:value="window-buttons" />
-                <String fx:value="close-button" />
+                <String fx:value="window-buttons"/>
+                <String fx:value="close-button"/>
             </styleClass>
         </Button>
-        <Label layoutX="19.0" layoutY="1.0" styleClass="title-small" text="Silverfern Desktop - Login" />
-        <Label layoutX="19.0" layoutY="27.0" id="title-big" styleClass="title-big" text="Loading" textFill="#577380" />
+        <Label layoutX="19.0" layoutY="4.0" styleClass="title-small" text="Silverfern Desktop - Login"/>
+        <Label layoutX="19.0" layoutY="27.0" id="title-big" styleClass="title-big" text="Loading" textFill="#577380"/>
     </AnchorPane>
     <Pane layoutY="100" id="panels">
-        <fx:include source="loading.fxml" prefWidth="480.0" />
+        <fx:include source="loading.fxml" prefWidth="480.0"/>
     </Pane>
 </AnchorPane>

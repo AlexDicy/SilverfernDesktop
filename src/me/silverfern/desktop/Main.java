@@ -124,6 +124,8 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // load default panel
+        loadPanel("logout");
         return scene;
     }
 
