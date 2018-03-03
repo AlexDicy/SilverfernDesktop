@@ -16,8 +16,8 @@ public class Logout {
         Main.getPref().remove("mc_user_token");
         Main.getPref().remove("mc_client_token");
         try {
-            Main.getScene().setRoot(FXMLLoader.load(getClass().getResource("/assets/fxml/home.fxml"), ResourceBundle.getBundle("assets.locales.Messages", Locale.ENGLISH)));
-            Main.getStage().sizeToScene();
+            Main.getScene().setRoot(FXMLLoader.load(getClass().getResource("/assets/fxml/main.fxml"), ResourceBundle.getBundle("assets.locales.Messages", Locale.ENGLISH)));
+            Main.getInstance().loadPanel("login", "Login");
         } catch (IOException e) {
             e.printStackTrace();
         }
